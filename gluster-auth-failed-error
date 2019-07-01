@@ -1,0 +1,26 @@
+######################### PERMISSION DENIED #################### AUTH FAILED ###################################
+
+
+Mounting arguments: --description=Kubernetes transient mount for /var/lib/origin/openshift.local.volumes/pods/0d51f03f-9c4e-11e9-9b72-00155d0e058d/volumes/kubernetes.io~glusterfs/pvc-6b26d08b-7724-11e9-bb3d-00155d0e056f --scope -- mount -t glusterfs -o log-file=/var/lib/origin/openshift.local.volumes/plugins/kubernetes.io/glusterfs/pvc-6b26d08b-7724-11e9-bb3d-00155d0e056f/solr-2-m5fht-glusterfs.log,backup-volfile-servers=10.68.14.162:10.68.14.163:10.68.14.164,log-level=ERROR 10.68.14.162:vol_42a2b32ff728adf9f5ff3b9d59548a75 /var/lib/origin/openshift.local.volumes/pods/0d51f03f-9c4e-11e9-9b72-00155d0e058d/volumes/kubernetes.io~glusterfs/pvc-6b26d08b-7724-11e9-bb3d-00155d0e056f
+Output: Running scope as unit run-2305.scope.
+Mount failed. Please check the log file for more details.
+
+ the following error information was pulled from the glusterfs log to help diagnose this issue: 
+[2019-07-01 22:18:10.585416] E [MSGID: 114044] [client-handshake.c:1144:client_setvolume_cbk] 0-vol_42a2b32ff728adf9f5ff3b9d59548a75-client-2: SETVOLUME on remote-host failed: Authentication failed [Permission denied]
+[2019-07-01 22:18:10.585452] E [fuse-bridge.c:5338:notify] 0-fuse: Server authenication failed. Shutting down.
+
+################################# SOLUTION #########################################################################
+
+link ref: https://lists.gluster.org/pipermail/gluster-users/2011-November/009017.html
+
+
+gluster> volume stop vol_42a2b32ff728adf9f5ff3b9d59548a75
+Stopping volume will make its data inaccessible. Do you want to continue? (y/n) y
+volume stop: vol_42a2b32ff728adf9f5ff3b9d59548a75: success
+gluster> volume start vol_42a2b32ff728adf9f5ff3b9d59548a75
+volume start: vol_42a2b32ff728adf9f5ff3b9d59548a75: success
+gluster> volume list
+glusterfs-registry-volume
+
+
+ps: In openshift execute commands into the glustefs pods
