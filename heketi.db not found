@@ -1,0 +1,3 @@
+"Having 1 out 3 bricks offline is not great but it would not lead to that particular error message from stat IMO" -
+I'm sure that it is an issue with the 1 out of 3 bricks offline, cause all my persistent volumes became unvisible to pods. When I restarted ALL volumes manually by command "for i in $(gluster volume list); do echo 'y' | gluster volume stop $i && gluster volume start $i;" and deleted old pods, new pods started succesfully interacting with persistence volumes.
+I don't know why I see such behavior. I have 4 nodes in my gluster cluster, with Replica 3, so 1 brick offline mustn't cause an error, but it cause.
