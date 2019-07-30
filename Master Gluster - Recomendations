@@ -1,0 +1,96 @@
+https://access.redhat.com/solutions/2451341
+
+
+Overview and Purpose
+
+This document describes the best practices regarding platforms and workloads for deploying Red Hat Gluster Storage (formerly Red Hat Storage Server) in a private cloud and a public cloud. Additionally, it enumerates the conditions in a proposed production deployment that warrant a review by Red Hat before deployment to determine whether a Red Hat Gluster Storage deployment is supportable. The presence of a condition in a production deployment that triggers an architecture review does not necessarily mean that a deployment is not supportable by Red Hat: while the presence of some such conditions result in unsupportable scenarios, others just need careful review and analysis before a production deployment is executed.
+
+This document also describes the process of requesting a review for a Red Hat Gluster Storage deployment under consideration.
+Environment
+
+    Red Hat Gluster Storage 3
+    Red Hat Gluster Storage for Public Cloud 3
+
+Supported Platforms
+
+The compatible platforms for Red Hat Gluster Storage including supported client platforms are described here.
+Supported & Recommended Workloads
+
+The supported workloads for Red Hat Gluster Storage are described here.
+Conditions that require an Architecture Review Prior to Deployment
+
+This section enumerates the Red Hat Gluster Storage deployment use-cases/conditions that need additional scrutiny before deployment. The presence of one or more of these conditions means the proposed environment must undergo a review process before deployment.
+Platform
+
+    If your platform and/or client OS is not present in the list of supported platforms for Red Hat Gluster Storage (including SAN LUNs or other kind of storage being used a bricks) as can be found here, then a review should be requested.
+    If you are hitting a maximum or a minimum limit as laid out here, then a review should be requested.
+
+Synchronous Replication across Data-Centers (stretched cluster)
+
+In general using synchronous replication across data-centres (also referred to as the "stretched cluster" use-case) is not recommended and supported by Red Hat Gluster Storage. However in a very few select instances where the measured round trip latency in the inter-site link is LAN like ( <= 5 msec) one may be provided with an approval to deploy. But a review is mandated before deployment.
+
+For more on Multi-site Architecture please refer article
+Running applications co-resident with storage
+
+Currently, running a distributed workload that is co-resident and specifically installed on Red Hat Gluster Storage needs to be approved prior to deployment except when it's a management or a backup agent that can run in the storage node with low/minimal impact to storage serving.
+Unsupported Use Cases
+
+This section lists the use cases for Red Hat Gluster Storage that are currently unsupported. This Knowledgebase article will be refreshed with supported use cases as they are approved for general use over time.
+Unbundling the GlusterFS file system and running it on other Operating Systems
+
+Red Hat Gluster Storage should be used as-is without modification to serve out storage. It is a pre-integrated, pre-verified and ready to run software stack with the underlying operating system and the native file system engineered together to work as whole. Usage of the Gluster File System on the server side on top of a different OS is not supported.
+Running Gluster Bricks on any other file system other than XFS
+
+The only file system that can be used for Gluster bricks is XFS (Red Hat's Scalable File System Add-On). Gluster bricks are not supported on other file systems, such as ext4.
+RDMA over Converged Ethernet (RoCE)
+
+Using trusted server pools where RoCE is used as the inter-connect technology is not supported. However native infiniband is now fully supported.
+Requesting a Review
+
+If your Red Hat Gluster Storage deployment has one or more of the conditions listed above, then a review is needed to determine the supportability of the deployment. All reviews and scoping issues are considered Severity 4 items for Red Hat support. To request a review from Red Hat, complete the following steps:
+
+    Gather the required information
+        The hardware platform on which Red Hat Gluster Storage is planned to be deployed
+        A high-level description of the workload along with a graphical representation (if possible)
+        I/O pattern
+        Trusted server pool size
+        Projected maximum file system size
+        Additional information as is needed for some of the conditions listed above
+        sosreport, if available
+
+    Contact Red Hat support services and open a support request for an Architecture Review for Red Hat Gluster Storage. Support ticket must be opened under customer account with valid entitlement(at least evaluation subscription).
+    Submit all of the documentation to the support representative
+
+Support will evaluate the request and may request additional clarification.
+
+Once all questions have been resolved, the support representative will provide information about whether or not the use-case is supportable. If it is not supportable, justifications will be provided on why the configuration was rejected. You may continue to work with support to determine what changes (if applicable) can be made to make it supportable.
+
+
+
+
+
+
+
+
+
+
+########################################## UNCLEAN SHUTDOWN GLUSTERFS HEKETI
+
+https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/troubleshoot/glusterfs_reboot.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
