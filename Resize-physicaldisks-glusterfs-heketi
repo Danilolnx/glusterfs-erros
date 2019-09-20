@@ -1,0 +1,59 @@
+1. Executar nos 3 nodes
+
+# Debug: Visualizar os PV
+pvs
+pvscan
+
+# Efetuar o resize do PV
+pvresize /dev/sdb
+
+# Validar se VG foi expandido
+vgs
+vgdisplay
+
+# Verificar os ID dos nodes para expansão
+
+heketi-cli node list
+
+	[root@heketi-storage-1-zxjgl /]# heketi-cli node list
+	Id:37070b6499da323219b9ffeaba4ba74a     Cluster:6c959d0d696aef567948932a8aada257
+	Id:627ae47ff308e90157b3792123a1b450     Cluster:6c959d0d696aef567948932a8aada257
+	Id:c228e264dd672f65a5b0fa74b6464d80     Cluster:6c959d0d696aef567948932a8aada257
+
+# Listar os devices de cada nó para expansão
+
+[root@heketi-storage-1-zxjgl /]# heketi-cli node info 37070b6499da323219b9ffeaba4ba74a
+	Node Id: 37070b6499da323219b9ffeaba4ba74a
+	State: online
+	Cluster Id: 6c959d0d696aef567948932a8aada257
+	Zone: 1
+	Management Hostname: spedf1029
+	Storage Hostname: 10.161.82.29
+	Devices:
+	Id:776925eca253dd0abd74559011e8f81e   Name:/dev/sdb            State:online    Size (GiB):599     Used (GiB):96      Free (GiB):503     Bricks:6
+[root@heketi-storage-1-zxjgl /]# heketi-cli node info 627ae47ff308e90157b3792123a1b450
+	Node Id: 627ae47ff308e90157b3792123a1b450
+	State: online
+	Cluster Id: 6c959d0d696aef567948932a8aada257
+	Zone: 1
+	Management Hostname: spedf1028
+	Storage Hostname: 10.161.82.28
+	Devices:
+	Id:b294def246ff7b9c3a90d18403e2bf74   Name:/dev/sdb            State:online    Size (GiB):99      Used (GiB):96      Free (GiB):3       Bricks:6
+[root@heketi-storage-1-zxjgl /]# heketi-cli node info c228e264dd672f65a5b0fa74b6464d80
+	Node Id: c228e264dd672f65a5b0fa74b6464d80
+	State: online
+	Cluster Id: 6c959d0d696aef567948932a8aada257
+	Zone: 1
+	Management Hostname: spedf1027
+	Storage Hostname: 10.161.82.27
+	Devices:
+	Id:7c10a9defbfa248753499918aacd7d4f   Name:/dev/sdb            State:online    Size (GiB):99      Used (GiB):96      Free (GiB):3       Bricks:6
+
+
+# Expandir devices
+heketi-cli device resync 776925eca253dd0abd74559011e8f81e
+
+heketi-cli device resync b294def246ff7b9c3a90d18403e2bf74
+
+heketi-cli device resync 7c10a9defbfa248753499918aacd7d4f
