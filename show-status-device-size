@@ -1,0 +1,16 @@
+Id:776925eca253dd0abd74559011e8f81e   Name:/dev/sdb            State:online    Size (GiB):99      Used (GiB):96      Free (GiB):3       Bricks:6
+[root@heketi-storage-1-zxjgl /]# heketi-cli device info 776925eca253dd0abd74559011e8f81e
+Device Id: 776925eca253dd0abd74559011e8f81e
+Name: /dev/sdb
+State: online
+Size (GiB): 99
+Used (GiB): 96
+Free (GiB): 3
+Bricks:
+Id:15d94b24c9802b5977a06cc74235eef2   Size (GiB):2       Path: /var/lib/heketi/mounts/vg_776925eca253dd0abd74559011e8f81e/brick_15d94b24c9802b5977a06cc74235eef2/brick
+Id:2377a95d3ee60ddbc92356a037b3601f   Size (GiB):8       Path: /var/lib/heketi/mounts/vg_776925eca253dd0abd74559011e8f81e/brick_2377a95d3ee60ddbc92356a037b3601f/brick
+Id:3bfb518757cc36757a171f24dcd6f2ef   Size (GiB):1       Path: /var/lib/heketi/mounts/vg_776925eca253dd0abd74559011e8f81e/brick_3bfb518757cc36757a171f24dcd6f2ef/brick
+Id:52718decffc5d23d490da0b0f9cecb8f   Size (GiB):10      Path: /var/lib/heketi/mounts/vg_776925eca253dd0abd74559011e8f81e/brick_52718decffc5d23d490da0b0f9cecb8f/brick
+Id:6fc2b2793bf085fcc0e7b5f8e421ba79   Size (GiB):25      Path: /var/lib/heketi/mounts/vg_776925eca253dd0abd74559011e8f81e/brick_6fc2b2793bf085fcc0e7b5f8e421ba79/brick
+Id:f530e607905d387cb7a521f8d38571e8   Size (GiB):50      Path: /var/lib/heketi/mounts/vg_776925eca253dd0abd74559011e8f81e/brick_f530e607905d387cb7a521f8d38571e8/brick
+[root@heketi-storage-1-zxjgl /]#
